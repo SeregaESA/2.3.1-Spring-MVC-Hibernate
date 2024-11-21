@@ -6,21 +6,29 @@ import web.models.Car;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class CarServies {
 
-    private ArrayList<Car> cars;
+    private List<Car> cars;
 
     {
-        cars.add(new Car("haval", "blue", 2));
-        cars.add(new Car("honda", "black", 4));
-        cars.add(new Car("toyota", "white", 7));
-        cars.add(new Car("suzuki", "elove", 5));
+        cars = new ArrayList<>();
+        cars.add(new Car("HAVAL", "blue", 2));
+        cars.add(new Car("HONDA", "black", 4));
+        cars.add(new Car("TOYOTA", "white", 7));
+        cars.add(new Car("SUZUKI", "yellow", 5));
         cars.add(new Car("BMW", "green", 8));
     }
 
-    public List <Car> index() {
-        return cars;
+    public List<Car> index(int count) {
+        List<Car> newCars = new ArrayList<>();
+        if (count >= 5) {
+            return newCars = cars;
+        } else {
+            for (int i = 0; i < count; i++) {
+                newCars.add(cars.get(i));
+            }
+        }
+        return newCars;
     }
-
 }

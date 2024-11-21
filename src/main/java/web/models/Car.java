@@ -1,13 +1,14 @@
 package web.models;
 
+
 public class Car {
     private String model;
-    private String colos;
+    private String colors;
     private int series;
 
-    public Car(String model, String colos, int series) {
+    public Car(String model, String colors, int series) {
         this.model = model;
-        this.colos = colos;
+        this.colors = colors;
         this.series = series;
     }
 
@@ -19,12 +20,12 @@ public class Car {
         this.model = model;
     }
 
-    public String getColos() {
-        return colos;
+    public String getColors() {
+        return colors;
     }
 
-    public void setColos(String colos) {
-        this.colos = colos;
+    public void setColors(String colors) {
+        this.colors = colors;
     }
 
     public int getSeries() {

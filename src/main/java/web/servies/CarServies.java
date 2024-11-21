@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CarServies {
+public class CarServies implements Servies {
 
     private List<Car> cars;
 
@@ -20,6 +20,7 @@ public class CarServies {
         cars.add(new Car("BMW", "green", 8));
     }
 
+    @Override
     public List<Car> index(int count) {
         List<Car> newCars = new ArrayList<>();
         if (count >= 5) {

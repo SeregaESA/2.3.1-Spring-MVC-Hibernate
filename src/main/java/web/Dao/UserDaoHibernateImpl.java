@@ -1,7 +1,6 @@
 package web.Dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.models.User;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import java.util.List;
 
 
 @Repository
-@Transactional(readOnly = true)
 public class UserDaoHibernateImpl implements UserDao {
 
     @PersistenceContext
@@ -18,14 +16,11 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        List<User> users = entityManager.createQuery("select u from User u", User.class).getResultList();
-        return users;
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Override
-    @Transactional
-    public void save(String name, String lastName, byte age) {
-        User user = new User(name, lastName, age);
+    public void save(User user) {
         entityManager.persist(user);
     }
 
@@ -35,8 +30,7 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    @Transactional
-    public <T extends User> void update(long id, T user) {
+    public void update(long id, User user) {
         User updateUser = entityManager.find(User.class, id);
         updateUser.setName(user.getName());
         updateUser.setLastName(user.getLastName());
@@ -45,7 +39,6 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void delete(long id) {
         User deleteUser = entityManager.find(User.class, id);
         entityManager.remove(deleteUser);

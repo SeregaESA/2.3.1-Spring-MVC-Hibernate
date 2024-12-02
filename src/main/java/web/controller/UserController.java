@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.models.User;
-import web.servies.UserServiceImpl;
+import web.servies.UserService;
 
 @Controller
 public class UserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @GetMapping(value = "/")
     public String index(Model model) {
@@ -29,9 +29,8 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(@RequestParam("name") String name, @RequestParam("lastName") String lastName,
-                             @RequestParam("age") byte age) {
-        userService.save(name, lastName, age);
+    public String createUser(@ModelAttribute User user) {
+        userService.save(user);
         return "redirect: /";
     }
 
@@ -43,7 +42,6 @@ public class UserController {
 
     @PostMapping(value = "/update")
     public String update(@ModelAttribute("user") User user, @RequestParam("id") long id) {
-
         userService.update(id, user);
         return "redirect:/";
     }
